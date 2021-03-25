@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuMainController">
+   <children>
+      <Button layoutX="219.0" layoutY="74.0" mnemonicParsing="false" onMouseClicked="#openAddDeleteFriend" prefHeight="25.0" prefWidth="163.0" text="Add/Delete Friend" textFill="#ebe123" />
+      <Button layoutX="219.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#OpenShowFriendRequest" prefHeight="25.0" prefWidth="163.0" text="Show Friend Requests" textFill="#43db27" />
+      <Button layoutX="219.0" layoutY="222.0" mnemonicParsing="false" onMouseClicked="#OpenWithdraw" text="Retragere cerei de prietenie" textFill="#f21111" />
+      <Button layoutX="219.0" layoutY="296.0" mnemonicParsing="false" onMouseClicked="#chat" prefHeight="25.0" prefWidth="163.0" text="Chat with someone" textFill="#3d15da" />
+   </children>
+</AnchorPane>
