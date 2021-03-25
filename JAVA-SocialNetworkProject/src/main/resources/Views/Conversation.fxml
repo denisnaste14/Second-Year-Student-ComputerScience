@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="407.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConversationController">
+   <children>
+      <TableView fx:id="table" layoutX="37.0" layoutY="57.0" prefHeight="261.0" prefWidth="545.0">
+        <columns>
+          <TableColumn fx:id="firstName" prefWidth="85.0" text="First Name" />
+          <TableColumn fx:id="lastName" minWidth="0.0" prefWidth="88.0" text="Last Name" />
+            <TableColumn fx:id="mesaj" prefWidth="262.0" text="Mesaj" />
+            <TableColumn fx:id="reply" prefWidth="109.0" text="Reply to" />
+        </columns>
+      </TableView>
+      <Label fx:id="ChatWithLabel" layoutX="37.0" layoutY="26.0" />
+      <Button layoutX="427.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#sendMsg" prefHeight="17.0" prefWidth="155.0" text="Trimite mesaj" />
+      <TextField fx:id="textField" layoutX="37.0" layoutY="343.0" prefHeight="25.0" prefWidth="372.0" />
+      <Button layoutX="427.0" layoutY="368.0" mnemonicParsing="false" onMouseClicked="#reply" prefHeight="25.0" prefWidth="155.0" text="Reply to" />
+   </children>
+</AnchorPane>
