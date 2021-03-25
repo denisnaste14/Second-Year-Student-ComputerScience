@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+   <children>
+      <Label layoutX="225.0" layoutY="85.0" prefHeight="22.0" prefWidth="68.0" text="username:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="227.0" layoutY="165.0" text="password:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernametf" layoutX="225.0" layoutY="114.0" prefHeight="25.0" prefWidth="151.0" />
+      <PasswordField fx:id="passwordtf" layoutX="226.0" layoutY="188.0" prefHeight="25.0" prefWidth="151.0" />
+      <Button fx:id="loginbtn" layoutX="227.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="25.0" prefWidth="149.0" text="Log in">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="signupbtn" layoutX="227.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="25.0" prefWidth="149.0" text="Sign up">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="228.0" layoutY="301.0" prefHeight="20.0" prefWidth="133.0" text="Create new account:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CautareController">
+   <children>
+      <TableView fx:id="table" layoutX="133.0" layoutY="72.0" prefHeight="301.0" prefWidth="335.0">
+        <columns>
+          <TableColumn fx:id="numeParticipantColumn" prefWidth="168.0" text="Nume Participant" />
+          <TableColumn fx:id="capCilindircaColumn" prefWidth="166.0" text="Capacitatea Cilindrica" />
+        </columns>
+      </TableView>
+      <Label layoutX="28.0" layoutY="25.0" prefHeight="33.0" prefWidth="546.0" text="Participantii echipei alese si capacitatile cilindrice a curselor la care acestia sunt inscrisi sunt:" />
+   </children>
+</AnchorPane>
