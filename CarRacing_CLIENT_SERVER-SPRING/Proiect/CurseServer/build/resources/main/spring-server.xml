@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <util:properties location="classpath:curseserver.properties" id="jdbcProps"/>
+    <bean id="pdr" class="repository.database.ParticipantDbRepo">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+    <bean id="cdr" class="repository.database.CursaDbRepo">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+    <bean id="idr" class="repository.database.InscriereDbRepo">
+        <constructor-arg ref="jdbcProps" index="0"/>
+        <constructor-arg ref="pdr" index="1"/>
+        <constructor-arg ref="cdr" index="2"/>
+    </bean>
+    <bean id="sdr" class="repository.database.StaffDbRepo">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="curseService" class="server.Service">
+        <constructor-arg ref="pdr" index="0"/>
+        <constructor-arg ref="cdr" index="1"/>
+        <constructor-arg ref="idr" index="2"/>
+        <constructor-arg ref="sdr" index="3"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="serviceName" value="CurseService"/>
+        <property name="service" ref="curseService"/>
+        <property name="serviceInterface" value="curse.services.ICurseServices"/>
+        <property name="registryPort" value="1099"/>
+    </bean>
+
+</beans>
