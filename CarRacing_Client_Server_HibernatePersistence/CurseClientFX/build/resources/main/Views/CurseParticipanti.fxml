@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CurseParticipantiController">
+   <children>
+      <TableView fx:id="table" layoutX="25.0" layoutY="29.0" prefHeight="296.0" prefWidth="298.0">
+        <columns>
+          <TableColumn fx:id="capCilindricaColumn" prefWidth="148.0" text="CapCilindrica" />
+          <TableColumn fx:id="nrParticipantiColumn" minWidth="0.0" prefWidth="149.0" text="NrParticipanti" />
+        </columns>
+      </TableView>
+      <Label layoutX="341.0" layoutY="29.0" prefHeight="28.0" prefWidth="242.0" text="Introduceti echipa dupa care cautati:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="echipatf" layoutX="381.0" layoutY="57.0" prefHeight="25.0" prefWidth="163.0" />
+      <Button layoutX="381.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#cautare" prefHeight="25.0" prefWidth="163.0" text="Cautare">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="341.0" layoutY="149.0" prefHeight="28.0" prefWidth="242.0" text="Inscrierea unui nou participant:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="capCilindricatf" layoutX="381.0" layoutY="195.0" prefHeight="25.0" prefWidth="163.0" />
+      <TextField fx:id="numetf" layoutX="381.0" layoutY="243.0" prefHeight="25.0" prefWidth="163.0" />
+      <TextField fx:id="echipaatf" layoutX="381.0" layoutY="294.0" prefHeight="25.0" prefWidth="163.0" />
+      <Button layoutX="381.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#inscriere" prefHeight="25.0" prefWidth="163.0" text="Inscriere">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="25.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#Logout" prefHeight="30.0" prefWidth="163.0" text="Logout" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="381.0" layoutY="177.0" prefHeight="17.0" prefWidth="163.0" text="Capacitatea Cilindrica:" />
+      <Label layoutX="381.0" layoutY="226.0" text="Nume participant:" />
+      <Label layoutX="381.0" layoutY="277.0" text="Echipa participant:" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+mainClassName='Main'
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project (':CurseServices')
+    compile project (':CurseModel')
+    compile project (':CurseNetworking')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar{
+    manifest{
+        attributes('Main-Class':'Main')
+    }
+
+    from{
+        configurations.compile.collect{it.isDirectory() ? it:zipTree(it)}
+    }
+}
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls' , 'javafx.fxml']
+}
+
