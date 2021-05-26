@@ -1,0 +1,10 @@
+rootProject.name = 'ProiectCurse'
+include 'CurseModel'
+include 'CursaPersistence'
+include 'CurseModel'
+include 'CursePersistence'
+include 'CurseServer'
+include 'CurseServices'
+include 'CurseClientFX'
+include 'CurseNetworking'
+
