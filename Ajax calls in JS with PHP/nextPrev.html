@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+
+    <style>
+        ul {
+            float: left;
+        }
+
+        div {
+            display: flex;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="persoane">Perosane: </div>
+    <button id="prev" onclick="pressPrev()">Prev</button>
+    <button id="next" onclick="pressNext()">Next</button>
+</body>
+
+<script>
+    var start;
+    var end;
+    var nrElem;
+    init();
+    function init() {
+        start = 1;
+        end = 3;
+        document.getElementById('prev').disabled=true;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var nrEle = this.responseText;
+                nrElem = nrEle;
+                getElems(start, end);
+            }
+        }
+        xmlhttp.open("GET", "persoane.php?start=0&stop=0&ct=1", true);
+        xmlhttp.send();
+    }
+
+    function getElems(inceput, sfarsit) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var elems = this.responseText;
+                var listElems = elems.split(";");
+                lista_noua(listElems);
+                
+            }
+        }
+        xmlhttp.open("GET", "persoane.php?start=" + inceput + "&stop=" + sfarsit + "&ct=0", true);
+        xmlhttp.send();
+    }
+
+    function lista_noua(lista_elem) {
+
+        var list = document.createElement('ul');
+        for (var i = 0; i < lista_elem.length; i++) {
+            var listItem = document.createElement('li');
+            listItem.appendChild(document.createTextNode(lista_elem[i]));
+            list.appendChild(listItem);
+        }
+        currentRuteList = list;
+        document.getElementById('persoane').removeChild(document.getElementById('persoane').firstChild);
+        document.getElementById('persoane').innerHTML = "Persoane:";
+        document.getElementById('persoane').appendChild(list);
+    }
+
+    function pressPrev() {
+        start -= 3;
+        if (start < 1) {
+            start = 1;
+        }
+        end = start + 2;
+        if (start == 1)
+            document.getElementById('prev').disabled = true;   
+        if (end < nrElem)
+            document.getElementById('next').disabled = false;
+        getElems(start, end);
+    }
+
+    function pressNext() {
+        end += 3;
+        if (end > nrElem)
+            end = nrElem;
+        start = end - 2;
+        if (end == nrElem)
+            document.getElementById('next').disabled = true;
+        if (start > 1)
+            document.getElementById('prev').disabled = false;   
+        getElems(start, end);
+    }
+
+</script>
+</html>

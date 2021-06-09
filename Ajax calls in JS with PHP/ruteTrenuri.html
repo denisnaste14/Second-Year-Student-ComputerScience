@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pb1</title>
+
+    <style>
+        ul {
+            float: left;
+            margin-right: 100px;
+        }
+
+        div {
+
+            display: flex;
+        }
+
+
+    </style>
+
+    <script>
+        var currentRuteList=null;
+        init_plecari();
+        function init_plecari() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var lista_elem = this.responseText;
+                    alert(lista_elem);
+                    var lst = lista_elem.split(',');
+                    lista_noua(lst);
+                }
+            }
+            xmlhttp.open("GET","ruteTrenuri.php?q=", true);
+            xmlhttp.send();
+        }
+
+        function lista_noua(lista_elem) {
+           
+            var list = document.createElement('ul');
+            for (var i = 0; i < lista_elem.length; i++) {
+                var listItem = document.createElement('li');
+                listItem.appendChild(document.createTextNode(lista_elem[i]));
+                listItem.addEventListener("click", function () {
+                    init_rute(this.textContent);
+                });
+                list.appendChild(listItem);
+            }
+            currentRuteList = list;
+            document.getElementById('plecariDiv').appendChild(list);
+        }
+
+        function init_rute(statiePlecare) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var lista_elem = this.responseText;
+                    
+                    var lst = lista_elem.split(',');
+                    rute(lst, statiePlecare);
+                }
+            }
+            xmlhttp.open("GET", "ruteTrenuri.php?q=" + statiePlecare, true);
+            xmlhttp.send();
+        }
+
+        function rute(lst,statiePlecare) {
+            document.getElementById('ruteDiv').removeChild(document.getElementById('ruteDiv').firstChild);
+            document.getElementById('ruteDiv').innerHTML = "Rute:";
+          
+            var list = document.createElement('ul');
+            for (var i = 0; i < lst.length; i++) {
+                var listItem = document.createElement('li');
+                listItem.appendChild(document.createTextNode(statiePlecare +'->'+lst[i]));
+                list.appendChild(listItem);
+            }
+            document.getElementById('ruteDiv').appendChild(list);
+        }
+    </script>
+</head>
+<body>
+    <div id="plecariDiv">Plecari: </div>
+    <div id="ruteDiv">Rute: </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pb4</title>
+    <style>
+        td {
+            border: 1px solid black;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            text-align:center;
+        }
+
+    </style>
+</head>
+<body>
+    <table id="tab">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
+            type="text/javascript">
+</script>
+<script type="text/javascript">
+
+    var cells;
+    var randomStart;
+    var cellsValues=[];
+    init();
+
+    function init() {
+        randomStart = Math.floor(Math.random() * 2);
+        cells = $('td');
+        for (i = 0; i < cells.length; i++) {
+            cells[i].addEventListener("click", function () {
+                clickHandler(this,3*$(this).parent().index()+1+$(this).index());
+            });
+            cellsValues[i] = 0;
+        }
+        cellsValues[i] = 0;
+        //daca randomStart este 1 atunci incepe calculatorul
+        if (randomStart == 1) {
+            mutarePC();
+        }
+               
+    }
+    function mutarePC() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var result = this.responseText;
+                if (result == "O Won") {
+                    alert(result);
+                    return;
+                }
+                else {
+                    var celule = $('td');
+                    var valori = result.split(",");
+                    for (i = 0; i <= 8; i++) {
+                        cellsValues[i + 1] = valori[i];
+                        if (valori[i] != 0) {
+                            celule[i].innerHTML = valori[i];
+                        }
+                    }
+                    //alert("here"+cellsValues);
+                }
+            }
+        }
+        xmlhttp.open("GET", "srvpb4.php?values=" + getCellValuesString() + "&check=0", true);
+        xmlhttp.send();
+    }
+
+
+    function getCellValuesString() {
+        var str = "";
+        for (i = 1; i < 9; i++) {
+            str += cellsValues[i] + ",";
+        }
+        str += cellsValues[i];
+        return str;
+    }
+
+    function checkVictoryStatus() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var result = this.responseText;
+                if (result == "X Won") {
+                    alert(result);
+                    stop();
+                }
+            }
+        }
+        xmlhttp.open("GET", "srvpb4.php?values=" + getCellValuesString()+"&check=1", true);
+        xmlhttp.send();
+    }
+
+    function clickHandler(cell, cellindex) {
+        if (cell.innerHTML == "") {
+            cell.innerHTML = 'X';
+            cellsValues[cellindex] = 'X';
+        }
+        checkVictoryStatus();
+        mutarePC();
+
+    }
+    
+</script>
+</html>
