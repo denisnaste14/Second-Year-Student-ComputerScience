@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+       .column{
+           text-align:center;
+           
+       }
+      
+       #poza{
+           width:40px;
+           height:50px;
+           visibility:hidden;
+       }
+    </style>
+</head>
+
+<body>
+    <table id="table1" border="1" width="200px" height="200px">
+        <tr>
+            <td class="column"> <img id="poza" src="apple.png" /></td>
+            <td class="column"> <img id="poza" src="pear.png" /></td>
+            <td class="column"> <img id="poza" src="grape.png" /></td>
+            <td class="column"> <img id="poza" src="peach.png" /></td>
+        </tr>
+        <tr>
+            <td class="column"> <img id="poza" src="grape.png" /></td>
+            <td class="column"> <img id="poza" src="pear.png" /></td>
+            <td class="column"> <img id="poza" src="peach.png" /></td>
+            <td class="column"> <img id="poza" src="apple.png" /></td>
+        </tr>
+        <tr>
+            <td class="column"> <img id="poza" src="peach.png" /></td>
+            <td class="column"> <img id="poza" src="apple.png" /></td>
+            <td class="column"> <img id="poza" src="pear.png" /></td>
+            <td class="column"> <img id="poza" src="grape.png" /></td>
+        </tr>
+        <tr>
+            <td class="column"> <img id="poza" src="pear.png" /></td>
+            <td class="column"> <img id="poza" src="grape.png" /></td>
+            <td class="column"> <img id="poza" src="peach.png" /></td>
+            <td class="column"> <img id="poza" src="apple.png" /></td>
+        </tr>
+
+    </table>
+
+    <script type="text/javascript">
+        var tbl = document.getElementById("table1");
+        var nrElem = tbl.rows.length * tbl.rows[0].cells.length;
+        var pair = 0;
+        var firstElem = "";
+        var firstElemCel = null;
+        if (tbl != null) {
+            for (var i = 0; i < tbl.rows.length; i++) {
+                for (var j = 0; j < tbl.rows[i].cells.length; j++)
+                    tbl.rows[i].cells[j].onclick = function () {
+                        //getval(this);
+                        memory(this, getval(this));
+                    };
+            }
+        }
+
+        function getval(cel) {
+            var b = cel.childNodes[1].getAttribute('src');
+
+            return b;
+
+
+        }
+
+        function memory(cel,celValue) {
+            cel.childNodes[1].style.visibility = 'visible';
+            pair++;
+            if (pair == 1) {
+                firstElem = celValue;
+                firstElemCel = cel;
+            }
+            if (pair == 2 && firstElem.localeCompare(celValue)==0) {
+                nrElem -= 2;
+                pair = 0;
+            }
+            else {
+                setTimeout(function () {
+                    if (firstElem.localeCompare(celValue) != 0) {
+
+                        firstElemCel.childNodes[1].style.visibility = 'hidden';
+                        cel.childNodes[1].style.visibility = 'hidden';
+                        firstElem = 0;
+                        firstElemCel = null;
+                        pair = 0;
+                    }
+                }, 1300);
+
+            }
+
+            if (nrElem == 0) {
+                alert("Ati terminat jocul!");
+            }
+        }
+    </script>
+</body>
+</html>

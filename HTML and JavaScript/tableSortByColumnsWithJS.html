@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    <table id="table1">
+        <tr>
+            <th>Fructe</th>
+            <td>Mere</td>
+            <td>Pere</td>
+            <td>Prune</td>
+            <td>Cirese</td>
+        </tr>
+        <tr>
+            <th>Pret</th>
+            <td>3</td>
+            <td>4</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <th>Cantitate</th>
+            <td>8</td>
+            <td>6</td>
+            <td>10</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <th>Calitate</th>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            <td>8</td>
+    </table>
+    <br>
+    <table id="table2">
+        <tr>
+            <th>Fructe</th>
+            <th>Pret</th>
+            <th>Cantitate</th>
+            <th>Calitate</th>
+        </tr>
+        <tr>
+            <td>Mere</td>
+            <td>3</td>
+            <td>8</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Pere</td>
+            <td>4</td>
+            <td>6</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Prune</td>
+            <td>1</td>
+            <td>10</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Cirese</td>
+            <td>2</td>
+            <td>5</td>
+            <td>8</td>
+        </tr>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
+            type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function init(tableID, direction) {
+            const table = $('#' + tableID);
+            const cells = $(table + ' th');
+
+            alert(cells);
+            for (let i = 0; i < cells.length; i++) {
+                let number = true;
+                if (i === 0)
+                    number = false;
+                cells[i].addEventListener("click", function () {
+                    sortTable(table, i, number, direction);
+                });
+            }
+        }
+
+        function sortTable(table, n, number, direction) {
+            var data, data2, switching, i, x, y, shouldSwitch;
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                data = table.rows;
+                if (direction === false) {
+                    var arr = [];
+                    for (var k = 0; k < data.length; k++)
+                        arr[k] = [];
+
+                    for (i = 0; i < data.length; i++)
+                        for (var j = 0; j < data.length; j++)
+                            arr[i].push(data[j].cells[i + 1]);
+
+                    data2 = arr;
+                    i = 0;
+                }
+                else {
+                    i = 1;
+                }
+
+                for (; i < (data.length - 1); i++) {
+                    shouldSwitch = false;
+                    if (direction === true) {
+                        x = data[i].getElementsByTagName("TD")[n];
+                        y = data[i + 1].getElementsByTagName("TD")[n];
+                    }
+                    else {
+                        x = data2[i][n];
+                        y = data2[i + 1][n];
+                    }
+                    if (!number) {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                    else {
+                        if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch && direction === true) {
+                    data[i].parentNode.insertBefore(data[i + 1], data[i]);
+                    switching = true;
+                }
+                if (shouldSwitch && direction === false) {
+                    for (let j = 0; j < data.length; j++) {
+                        const k = data[j].cells[i + 1].innerHTML;
+                        data[j].cells[i + 1].innerHTML = data[j].cells[i + 2].innerHTML;
+                        data[j].cells[i + 2].innerHTML = k;
+                    }
+                    switching = true;
+                }
+            }
+        }
+    </script>
+
+    <script></script>
+    <script>init("table1", false); init("table2", true);</script>
+</body>
+</html>

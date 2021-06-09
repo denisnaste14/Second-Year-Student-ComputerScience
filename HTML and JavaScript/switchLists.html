@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <label id="kk">Prima lista:</label>
+    <br>
+    <select id="primaLista" multiple="multiple" ondblclick="switch1to2()">
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option value="d">d</option>
+        <option value="e">e</option>
+    </select>
+    <br>
+    <label>A doua lista:</label>
+    <br>
+    <select id="aDouaLista" multiple="multiple" ondblclick="switch2to1()">
+        <option value="a1">a1</option>
+        <option value="b1">b1</option>
+        <option value="c1">c1</option>
+        <option value="d1">d1</option>
+        <option value="e1">e1</option>
+    </select>
+    
+    <script type="text/javascript">
+        function switch1to2() {
+            var x = document.getElementById('primaLista');
+            var elementSelectat = x.selectedIndex;
+            var y = document.getElementById('aDouaLista');
+            var option = document.createElement("option");
+            option = x.item(elementSelectat);
+            y.add(option);
+        }
+
+        function switch2to1() {
+            var x = document.getElementById('aDouaLista');
+            var indexElemSelectat = x.selectedIndex;
+            var y = document.getElementById('primaLista');
+            var option = document.createElement("option");
+            option = x.item(indexElemSelectat);
+            y.add(option);
+        }  
+    </script>
+</body>
+</html> 
